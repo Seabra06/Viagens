@@ -1,26 +1,8 @@
-import java.util.Scanner;
 public class Validacao {
-    public static void main(String[] args) {
-        System.out.println("Digite seu cpf (somente números): ");
-        Scanner tcd = new Scanner(System.in);
-        String cpf = tcd.nextLine();
+    public static boolean cpf(String _cpf){
 
-        if (Util.validaCPF(cpf)) {
-            System.out.println("CPF OK");
-        } else {
-            System.out.println("CPF Inválido!");
-        }
+        // validação do cpf
 
-        tcd.close();
-    }
-
-    public static boolean cpf(String cpf) {
-        return false;
-    }
-}
-
-class Util {
-    public static boolean validaCPF(String cpf) {
         int numero = 0;
         int indice = 1;
         int digito1 = 0;
@@ -29,12 +11,13 @@ class Util {
         int digito2Original = 0;
 
         try {
-            if (cpf.length() == 11) {
-                digito1Original = Integer.parseInt(String.valueOf(cpf.charAt(9)));
-                digito2Original = Integer.parseInt(String.valueOf(cpf.charAt(10)));
+            if (_cpf.length() == 11) {
+                digito1Original = Integer.parseInt(String.valueOf(_cpf.charAt(9)));
+                digito2Original = Integer.parseInt(String.valueOf(_cpf.charAt(10)));
+
 
                 for (int i = 8; i >= 0; i--) {
-                    int itemCpf = Integer.parseInt(String.valueOf(cpf.charAt(i)));
+                    int itemCpf = Integer.parseInt(String.valueOf(_cpf.charAt(i)));
                     indice = indice + 1;
                     numero = numero + (indice * itemCpf);
                 }
@@ -50,7 +33,7 @@ class Util {
                     numero = 0;
                     indice = 1;
                     for (int i = 9; i >= 0; i--) {
-                        int itemCpf = Integer.parseInt(String.valueOf(cpf.charAt(i)));
+                        int itemCpf = Integer.parseInt(String.valueOf(_cpf.charAt(i)));
                         indice = indice + 1;
                         numero = numero + (indice * itemCpf);
                     }
@@ -65,8 +48,7 @@ class Util {
                 }
             }
         } catch (Exception e) {
-            // TODO: handle exception
-
+            System.out.println(e.getMessage().toString());
         }
 
         return false;
